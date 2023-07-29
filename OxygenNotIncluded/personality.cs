@@ -12,24 +12,26 @@ namespace Database
 		// Token: 0x0600681A RID: 26650 RVA: 0x00280054 File Offset: 0x0027E254
 		public Personalities()
 		{
-            List<string> roster = new List<string>(
-                new string[] {
-                    "Nisbet",
-                    "Bubbles",
-                    "Ashkan",
-                    "Ellie",
-                    "Jean",
-                    "Otto",
-                    "Ren",
-                    "Pei"
-                }
-            );
+            // List<string> roster = new List<string>(
+            //     new string[] {
+            //         "Nisbet",
+            //         "Bubbles",
+            //         "Ashkan",
+            //         "Ellie",
+            //         "Jean",
+            //         "Otto",
+            //         "Ren",
+            //         "Pei",
+			// 		"Lindsay",
+			// 		"Harold",
+            //     }
+            // );
 			foreach (Personalities.PersonalityInfo personalityInfo in AsyncLoadManager<IGlobalAsyncLoader>.AsyncLoader<Personalities.PersonalityLoader>.Get().entries)
 			{
 				Personality resource = new Personality(personalityInfo.Name.ToUpper(), Strings.Get(string.Format("STRINGS.DUPLICANTS.PERSONALITIES.{0}.NAME", personalityInfo.Name.ToUpper())), personalityInfo.Gender.ToUpper(), personalityInfo.PersonalityType, personalityInfo.StressTrait, personalityInfo.JoyTrait, personalityInfo.StickerType, personalityInfo.CongenitalTrait, personalityInfo.HeadShape, personalityInfo.Mouth, personalityInfo.Neck, personalityInfo.Eyes, personalityInfo.Hair, personalityInfo.Body, personalityInfo.Belt, personalityInfo.Cuff, personalityInfo.Foot, personalityInfo.Hand, personalityInfo.Pelvis, personalityInfo.Leg, Strings.Get(string.Format("STRINGS.DUPLICANTS.PERSONALITIES.{0}.DESC", personalityInfo.Name.ToUpper())), personalityInfo.ValidStarter);
-                if (roster.Contains(personalityInfo.Name)) {
+                // if (roster.Contains(personalityInfo.Name)) {
                     base.Add(resource);
-                }
+                // }
 			}
 		}
 
@@ -64,7 +66,26 @@ namespace Database
 		// Token: 0x0600681E RID: 26654 RVA: 0x002801E8 File Offset: 0x0027E3E8
 		public List<Personality> GetAll(bool onlyEnabledMinions, bool onlyStartingMinions)
 		{
-			return this.resources.FindAll((Personality x) => (!onlyStartingMinions || x.startingMinion) && (!onlyEnabledMinions || !x.Disabled));
+			List<string> roster = new List<string>(
+                new string[] {
+                    "Nisbet".ToUpper(),
+                    "Bubbles".ToUpper(),
+                    "Ashkan".ToUpper(),
+                    "Ellie".ToUpper(),
+                    "Jean".ToUpper(),
+                    "Otto".ToUpper(),
+                    "Ren".ToUpper(),
+                    "Pei".ToUpper(),
+					"Lindsay".ToUpper(),
+					"Harold".ToUpper()
+                }
+            );
+			return this.resources.FindAll(
+				(Personality x) => 
+					(!onlyStartingMinions || x.startingMinion) && 
+					(!onlyEnabledMinions || !x.Disabled) &&
+					(roster.Contains(x.nameStringKey))
+			);
 		}
 
 		// Token: 0x0600681F RID: 26655 RVA: 0x00280220 File Offset: 0x0027E420
