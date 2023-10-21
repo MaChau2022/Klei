@@ -22,8 +22,8 @@ namespace Database
             //         "Otto",
             //         "Ren",
             //         "Pei",
-			// 		"Lindsay",
-			// 		"Harold",
+			// 			"Lindsay",
+			// 			"Harold",
             //     }
             // );
 			foreach (Personalities.PersonalityInfo personalityInfo in AsyncLoadManager<IGlobalAsyncLoader>.AsyncLoader<Personalities.PersonalityLoader>.Get().entries)
@@ -63,6 +63,7 @@ namespace Database
 			return this.resources.FindAll((Personality x) => x.startingMinion);
 		}
 
+		/** MODIFY */
 		// Token: 0x0600681E RID: 26654 RVA: 0x002801E8 File Offset: 0x0027E3E8
 		public List<Personality> GetAll(bool onlyEnabledMinions, bool onlyStartingMinions)
 		{

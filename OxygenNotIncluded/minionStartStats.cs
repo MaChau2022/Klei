@@ -369,6 +369,7 @@ public class MinionStartingStats : ITelepadDeliverable
 		return statDelta;
 	}
 
+	/** MODITY */
 	// Token: 0x06003DE2 RID: 15842 RVA: 0x00157724 File Offset: 0x00155924
 	private void GenerateAptitudes(string guaranteedAptitudeID = null)
 	{
